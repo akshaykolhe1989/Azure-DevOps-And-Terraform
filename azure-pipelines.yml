@@ -32,8 +32,19 @@ stages:
       displayName: 'Cloning the repository'
       clean: true
     - script: |
+        echo 'Echo Build Source Dir $(Build.SourcesDirectory) ...'
         dir $(Build.SourcesDirectory)
-        pwd && ls -al
+        echo 'Echo current directory ...'
+        pwd
+        echo 'Echo list all files ...'
+        ls -al
+    - task: Gradle@3
+      inputs:
+        gradleWrapperFile: 'gradlew'
+        tasks: 'build'
+        publishJUnitResults: false
+        testResultsFiles: '**/TEST-*.xml'
+        javaHomeOption: 'JDKVersion'
     - task: Docker@2
       inputs:
         containerRegistry: 'akdocpro001 Docker Hub'
