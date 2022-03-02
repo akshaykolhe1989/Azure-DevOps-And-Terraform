@@ -14,7 +14,7 @@ resources:
     type: github
     endpoint: akshaykolhe1989
     name: akshaykolhe1989/Azure-DevOps-And-Terraform
-    ref: master
+    ref: main
 
 variables:
   tag: '$(Build.BuildId)'
