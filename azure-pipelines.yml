@@ -5,8 +5,16 @@
 trigger:
 - main
 
+#resources:
+#- repo: self
+
 resources:
-- repo: self
+  repositories:
+  - repository: akshaykolhe1989 # The name used to reference this repository in the checkout step
+    type: github
+    endpoint: akshaykolhe1989
+    name: akshaykolhe1989/Azure-DevOps-And-Terraform
+    ref: master
 
 variables:
   tag: '$(Build.BuildId)'
@@ -20,6 +28,11 @@ stages:
     pool:
       vmImage: ubuntu-latest
     steps:
+    - checkout: Azure-DevOps-And-Terraform
+      displayName: 'Cloning the repository'
+    - script: |
+        dir $(Build.SourcesDirectory)
+        pwd && ls -al
     - task: Docker@2
       inputs:
         containerRegistry: 'akdocpro001 Docker Hub'
