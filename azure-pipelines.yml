@@ -28,8 +28,9 @@ stages:
     pool:
       vmImage: ubuntu-latest
     steps:
-    - checkout: Azure-DevOps-And-Terraform
+    - checkout: self #Azure-DevOps-And-Terraform
       displayName: 'Cloning the repository'
+      clean: true
     - script: |
         dir $(Build.SourcesDirectory)
         pwd && ls -al
